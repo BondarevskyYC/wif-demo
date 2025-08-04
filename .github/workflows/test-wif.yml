@@ -6,7 +6,7 @@ permissions:
 on:
   # Запускает выполнение сценария при пуш или пул-реквесте в ветке "main"
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
     branches: [ "main" ]
 
