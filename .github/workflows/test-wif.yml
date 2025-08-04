@@ -17,6 +17,8 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
+    
+    # Получить токен рабочего процесса (первый способ через системные переменные окружения $ACTIONS_ID_TOKEN_REQUEST_TOKEN $ACTIONS_ID_TOKEN_REQUEST_URL)
     - name: Get ID Token
       id: get_token
       run: |
@@ -34,7 +36,7 @@ jobs:
     - name: Install OIDC Client from Core Package
       run: npm install @actions/core @actions/http-client
     
-    # Получить токен задания рабочего процесса
+    # Получить токен рабочего процесса (второй способ через SDK)
     - name: Get Id Token
       uses: actions/github-script@v7
       id: tokenid
@@ -44,7 +46,7 @@ jobs:
           let id_token = await coredemo.getIDToken()
           coredemo.setOutput('id_token', id_token)
     
-    # Обменять токен задания рабочего процесса на IAM-токен сервисного аккаунта в Yandex Cloud
+    # Обменять токен рабочего процесса на IAM-токен сервисного аккаунта в Yandex Cloud
     - name: GetIAMToken
       run: |
         SA_ID="aje3uo9tr37mn2g83nkh"
