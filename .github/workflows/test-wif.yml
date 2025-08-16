@@ -67,6 +67,7 @@ jobs:
         echo "config yc cli..."
         export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}
         echo "YC_TOKEN=$YC_TOKEN"
+        yc config profile create sa-profile
         # выводим список serverless
         yc serverless container list
         # создаем serverless
