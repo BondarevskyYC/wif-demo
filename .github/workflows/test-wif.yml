@@ -55,3 +55,18 @@ jobs:
         echo "SECRET_DATA="
         echo "${SECRET_DATA}"
       id: getlockboxpayload
+
+    # Runs a set of commands using the runners shell
+    - name: Run a multi-line script
+      run: |
+        # скачиваем
+        curl -f -s -LO https://storage.yandexcloud.net/yandexcloud-yc/install.sh
+        sudo bash install.sh -i /usr/local/yandex-cloud -n
+        sudo ln -sf /usr/local/yandex-cloud/bin/yc /usr/local/bin/yc
+        # конфигурируем
+        echo "config yc cli..."
+        export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}
+        # выводим список serverless
+        yc serverless container list
+        # создаем serverless
+        yc serverless container revision deploy  --container-name bondarevsky --image cr.yandex/crprpai76362s82qgl49/bondarevsky:latest --service-account-id ajeqhpquhj15a0ngjfuo
