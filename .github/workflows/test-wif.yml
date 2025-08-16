@@ -65,12 +65,12 @@ jobs:
         sudo ln -sf /usr/local/yandex-cloud/bin/yc /usr/local/bin/yc
         # конфигурируем
         echo "config yc cli..."
-        echo "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.bashrc # Command for bash shell
+        "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.zshrc
+        "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.bashrc # Command for bash shell
         export IAM_TOKEN=$YC_TOKEN
         echo "YC_TOKEN=$YC_TOKEN"
-        yc compute instance list --debug
         #yc config profile create sa-profile
         # выводим список serverless
-        yc serverless container list
+        yc serverless container list --debug
         # создаем serverless
         yc serverless container revision deploy  --container-name bondarevsky --image cr.yandex/crprpai76362s82qgl49/bondarevsky:latest --service-account-id ajeqhpquhj15a0ngjfuo
