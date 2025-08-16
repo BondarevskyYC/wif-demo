@@ -22,6 +22,8 @@ jobs:
     - name: Get ID Token
       id: get_token
       run: |
+        echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN=$ACTIONS_ID_TOKEN_REQUEST_TOKEN"
+        echo "ACTIONS_ID_TOKEN_REQUEST_URL=$ACTIONS_ID_TOKEN_REQUEST_URL"
         IDTOKEN=$(curl -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" $ACTIONS_ID_TOKEN_REQUEST_URL  -H "Accept: application/json; api-version=2.0" -H "Content-Type: application/json" -d "{}" | jq -r '.value')
         jwtd() {
             if [[ -x $(command -v jq) ]]; then
@@ -32,18 +34,7 @@ jobs:
         jwtd $IDTOKEN
         echo "idToken=${IDTOKEN}" >> $GITHUB_OUTPUT    
 
-    - name: Install OIDC Client from Core Package
-      run: npm install @actions/core @actions/http-client
-    
-    # Получить токен рабочего процесса (второй способ через SDK)
-    - name: Get Id Token
-      uses: actions/github-script@v7
-      id: tokenid
-      with:
-        script: |
-          const coredemo = require('@actions/core')
-          let id_token = await coredemo.getIDToken()
-          coredemo.setOutput('id_token', id_token)
+  
     
     # Обменять токен рабочего процесса на IAM-токен сервисного аккаунта в Yandex Cloud
     - name: GetIAMToken
