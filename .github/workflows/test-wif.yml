@@ -33,12 +33,15 @@ jobs:
         }
         jwtd $IDTOKEN
         echo "idToken=${IDTOKEN}" >> $GITHUB_OUTPUT    
+        echo "CC_TOKEN=$IDTOKEN" >> "$GITHUB_ENV"
 
   
     
     # Обменять токен рабочего процесса на IAM-токен сервисного аккаунта в Yandex Cloud
     - name: GetIAMToken
       run: |
+        echo -e "\033[0;32m==>\033[0m Token get from env"
+        echo "CC_TOKEN=${{ env.CC_TOKEN }}"
         SA_ID="aje3uo9tr37mn2g83nkh"
         IAMTOKEN=$(curl -sH "Content-Type: application/x-www-form-urlencoded" -d "grant_type=urn:ietf:params:oauth:grant-type:token-exchange&requested_token_type=urn:ietf:params:oauth:token-type:access_token&audience=$SA_ID&subject_token=${{steps.get_token.outputs.IDTOKEN}}&subject_token_type=urn:ietf:params:oauth:token-type:id_token" -X POST https://auth.yandex.cloud/oauth/token | jq -r '.access_token')
         echo "IAMToken=${IAMTOKEN}" >> $GITHUB_OUTPUT
