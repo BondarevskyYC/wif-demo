@@ -65,8 +65,8 @@ jobs:
         sudo ln -sf /usr/local/yandex-cloud/bin/yc /usr/local/bin/yc
         # конфигурируем
         echo "config yc cli..."
-        echo "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.bashrc # Command for bash shell
-        echo "YC_TOKEN=$YC_TOKEN"
+        echo "export IAM_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.bashrc # Command for bash shell
+        echo "IAM_TOKEN=$IAM_TOKEN"
         #yc config profile create sa-profile
         # выводим список serverless
         yc serverless container list
