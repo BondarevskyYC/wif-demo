@@ -66,6 +66,7 @@ jobs:
         # конфигурируем
         echo "config yc cli..."
         echo "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.bashrc # Command for bash shell
+        export IAM_TOKEN=$YC_TOKEN
         echo "YC_TOKEN=$YC_TOKEN"
         yc compute instance list --debug
         #yc config profile create sa-profile
