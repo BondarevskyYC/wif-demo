@@ -27,8 +27,8 @@ provider "yandex" {
 //
 // Create a new Serverless Container.
 //
-resource "yandex_serverless_container" "test_container_mibon" {
-  name               = "some_name_mibon2025"
+resource "yandex_serverless_container" "testcontainermibon" {
+  name               = "somenamemibon2025"
   description        = "any description"
   memory             = 256
   execution_timeout  = "15s"
