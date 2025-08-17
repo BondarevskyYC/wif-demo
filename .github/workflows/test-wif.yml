@@ -17,6 +17,8 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
+
+    - uses: actions/checkout@v3
     
     # Получить токен рабочего процесса (первый способ через системные переменные окружения $ACTIONS_ID_TOKEN_REQUEST_TOKEN $ACTIONS_ID_TOKEN_REQUEST_URL)
     - name: Get ID Token
