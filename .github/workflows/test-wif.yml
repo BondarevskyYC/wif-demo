@@ -2,6 +2,7 @@ name: CI
 
 permissions:
   id-token: write # Требуется для запроса JWT-токена
+  contents: read
 
 on:
   # Запускает выполнение сценария при пуш или пул-реквесте в ветке "main"
