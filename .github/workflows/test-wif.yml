@@ -90,6 +90,8 @@ jobs:
       env:
         YC_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
         IAM_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
+        YC_CLOUD_ID: b1g3o4minpkuh10pd2rj
+        YC_FOLDER_ID: b1gk7fa3kaal3f3et1n6
       run: |
         ls
         cd ./cloud-terraform
