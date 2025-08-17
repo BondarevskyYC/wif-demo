@@ -55,6 +55,13 @@ jobs:
         echo "SECRET_DATA="
         echo "${SECRET_DATA}"
       id: getlockboxpayload
+
+    - name: Login to ACR
+      uses: docker/login-action@v3
+      with:
+        registry: cr.yandex
+        username: "iam"
+        password: ${{steps.IAMtoken.outputs.IAMTOKEN}}
     
     - name: docker-login
       run: |
