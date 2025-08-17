@@ -74,6 +74,9 @@ jobs:
         docker pull cr.yandex/crprpai76362s82qgl49/bondarevsky:latest
         docker push cr.yandex/crprpai76362s82qgl49/bondarevsky:latest
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      
     - name: tf
       env:
         YC_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
