@@ -55,6 +55,13 @@ jobs:
         echo "SECRET_DATA="
         echo "${SECRET_DATA}"
       id: getlockboxpayload
+    
+    - name: docker-login
+      run: |
+        echo ${{steps.IAMtoken.outputs.IAMTOKEN}} | docker login \
+        --username iam \
+        --password-stdin \
+        cr.yandex
 
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
