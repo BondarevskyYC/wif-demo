@@ -98,3 +98,8 @@ jobs:
         yc serverless container list --debug
         # создаем serverless
         #yc serverless container revision deploy  --container-name bondarevsky --image cr.yandex/crprpai76362s82qgl49/bondarevsky:latest --service-account-id aje3uo9tr37mn2g83nkh
+
+    - name: tf
+      run: |
+        terraform init
+  
