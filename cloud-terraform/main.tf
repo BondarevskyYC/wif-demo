@@ -41,6 +41,25 @@ resource "yandex_serverless_container" "testcontainermibon" {
   }
 }
 
+
+resource "yandex_serverless_container" "example" {
+  name = "example-container"
+  image = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
+  memory = 128 # Memory in MB
+  execution_timeout = 300 # Timeout in seconds
+  service_account_id = var.sa_id
+
+  environment {
+    key   = "ENV_VAR_KEY"
+    value = "ENV_VAR_VALUE"
+  }
+
+  network_access {
+    allow_internet = true
+  }
+}
+
+
 //
 // Create a new Serverless Container with Image digest.
 //
