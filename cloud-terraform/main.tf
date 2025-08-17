@@ -27,7 +27,7 @@ provider "yandex" {
 
 
 resource "yandex_serverless_container" "serverless_container" {
-  name               = "serverless000000000"
+  name               = "mibon1"
   memory             = 128
   service_account_id = var.sa_id
   image {
@@ -36,7 +36,7 @@ resource "yandex_serverless_container" "serverless_container" {
 }
 
 resource "yandex_serverless_container" "test-container-with-digest" {
-  name   = "somenamemibon2025123"
+  name   = "mibon2"
   service_account_id = var.sa_id
   memory = 128
   image {
