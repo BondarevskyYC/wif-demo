@@ -24,26 +24,9 @@ provider "yandex" {
   folder_id = var.folder_id
 }
 
-//
-// Create a new Serverless Container.
-//
-resource "yandex_serverless_container" "testcontainermibon" {
-  name               = "somenamemibon2025"
-  description        = "any description"
-  memory             = 256
-  execution_timeout  = "15s"
-  cores              = 1
-  core_fraction      = 100
-  service_account_id = var.sa_id
-  
-  image {
-    url = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
-  }
-}
-
 
 resource "yandex_serverless_container" "example" {
-  name = "example-container"
+  name = "examplecontainer909090"
   image = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
   memory = 128 # Memory in MB
   execution_timeout = 300 # Timeout in seconds
@@ -60,11 +43,18 @@ resource "yandex_serverless_container" "example" {
 }
 
 
-//
-// Create a new Serverless Container with Image digest.
-//
+resource "yandex_serverless_container" "serverless_container" {
+  name               = "serverless000000000"
+  memory             = 128
+  service_account_id = var.sa_id
+  image {
+    url = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
+  }
+}
+
 resource "yandex_serverless_container" "test-container-with-digest" {
   name   = "somenamemibon2025123"
+  service_account_id = var.sa_id
   memory = 128
   image {
     url    = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
