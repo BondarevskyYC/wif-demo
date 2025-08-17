@@ -25,23 +25,6 @@ provider "yandex" {
 }
 
 
-resource "yandex_serverless_container" "example" {
-  name = "examplecontainer909090"
-  image = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
-  memory = 128 # Memory in MB
-  execution_timeout = 300 # Timeout in seconds
-  service_account_id = var.sa_id
-
-  environment {
-    key   = "ENV_VAR_KEY"
-    value = "ENV_VAR_VALUE"
-  }
-
-  network_access {
-    allow_internet = true
-  }
-}
-
 
 resource "yandex_serverless_container" "serverless_container" {
   name               = "serverless000000000"
