@@ -41,3 +41,15 @@ resource "yandex_serverless_container" "testcontainermibon" {
   }
 }
 
+//
+// Create a new Serverless Container with Image digest.
+//
+resource "yandex_serverless_container" "test-container-with-digest" {
+  name   = "somenamemibon2025123"
+  memory = 128
+  image {
+    url    = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
+  }
+}
+
+
