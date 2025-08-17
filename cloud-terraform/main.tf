@@ -7,9 +7,7 @@ terraform {
   required_version = ">= 0.13"
 }
 
-provider "yandex" {
-  zone = "ru-central1-a"
-}
+
 
 variable "folder_id" {
  type = string
@@ -21,18 +19,35 @@ variable "sa_id" {
  description = "YC SA ID"
 }
 
+provider "yandex" {
+  zone = "ru-central1-a"
+  folder_id = var.folder_id
+}
+
+resource "yandex_serverless_container" "my_container2" {
+  name = "my-serverless-app-2026"
+  image {
+    url = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
+  }
+  cores           = 1
+  memory          = 256
+  concurrency     = 4
+  execution_timeout = "60s"
+  service_account_id = var.sa_id
+  environment = {
+    MY_ENV_VAR = "some_value"
+  }
+}
+
 resource "yandex_serverless_container" "my_container" {
-  name        = "my-first-container"
+  name        = "my-bondarevsky-container-2026"
   description = "A sample serverless container"
   folder_id   = var.folder_id # Replace with your Yandex Cloud folder ID
 
   # Define the revision for the container
   revision {
     image {
-      url     = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest" # Replace with your Container Registry image URL
-      digest  = "sha256:your_image_digest" # Optional: specify image digest for immutability
-      command = ["/app/start.sh"] # Optional: command to execute within the container
-      args    = ["--env", "production"] # Optional: arguments for the command
+      url     = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest" 
     }
 
     resources {
