@@ -82,6 +82,7 @@ jobs:
         YC_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
         IAM_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
       run: |
+        ls
         terraform init
         
     # Runs a set of commands using the runners shell
