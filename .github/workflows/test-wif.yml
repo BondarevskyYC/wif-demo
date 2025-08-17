@@ -66,10 +66,12 @@ jobs:
         # конфигурируем
         echo "config yc cli..."
         #"export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.zshrc
-        "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.bashrc # Command for bash shell
+        "export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" #>> ~/.bashrc # Command for bash shell
         export IAM_TOKEN=$YC_TOKEN
         echo "YC_TOKEN=$YC_TOKEN"
+        yc config set cloud-id b1g3o4minpkuh10pd2rj 
         yc config set folder-id b1gk7fa3kaal3f3et1n6
+        echo $YC_TOKEN
         #yc config profile create sa-profile
         # выводим список serverless
         yc serverless container list --debug
