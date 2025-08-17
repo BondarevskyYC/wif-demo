@@ -76,6 +76,9 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
+      env:
+        YC_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
+        IAM_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
       run: |
         # скачиваем
         curl -f -s -LO https://storage.yandexcloud.net/yandexcloud-yc/install.sh
@@ -84,9 +87,9 @@ jobs:
         # конфигурируем
         echo "config yc cli..."
         #"export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.zshrc
-        export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}
-        export IAM_TOKEN=$YC_TOKEN
-        yc config set token $IAM_TOKEN
+        #export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}
+        #export IAM_TOKEN=$YC_TOKEN
+        #yc config set token $IAM_TOKEN
         yc config set cloud-id b1g3o4minpkuh10pd2rj 
         yc config set folder-id b1gk7fa3kaal3f3et1n6
         echo $YC_TOKEN
@@ -94,4 +97,4 @@ jobs:
         # выводим список serverless
         yc serverless container list --debug
         # создаем serverless
-        yc serverless container revision deploy  --container-name bondarevsky --image cr.yandex/crprpai76362s82qgl49/bondarevsky:latest --service-account-id aje3uo9tr37mn2g83nkh
+        #yc serverless container revision deploy  --container-name bondarevsky --image cr.yandex/crprpai76362s82qgl49/bondarevsky:latest --service-account-id aje3uo9tr37mn2g83nkh
