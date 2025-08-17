@@ -83,6 +83,8 @@ jobs:
         IAM_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
       run: |
         ls
+        cd cloud-terraform
+        ls
         terraform init
         
     # Runs a set of commands using the runners shell
