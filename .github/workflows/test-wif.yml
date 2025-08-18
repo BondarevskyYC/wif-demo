@@ -109,7 +109,7 @@ jobs:
         EOF
 
         terraform init -reconfigure
-        terraform plan -var="folder_id=${{env.YC_FOLDER_ID}}" -var="sa_id=${{env.CC_TOKEN}}"
+        terraform plan -var="folder_id=${{env.YC_FOLDER_ID}}" -var="sa_id=aje3uo9tr37mn2g83nkh"
         terraform apply -auto-approve -var="folder_id=${{env.YC_FOLDER_ID}}" -var="sa_id=aje3uo9tr37mn2g83nkh"
       
     # Runs a set of commands using the runners shell
