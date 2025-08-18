@@ -1,0 +1,44 @@
+# .python-app.yml
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    # Install project dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Execute test and generate report    
+    - name: Test with pytest
+      run: |
+        pytest --junitxml=results/test-results.xml src/tests.py
+
+    # Install Test IT CLI and submit test results to TMS    
+    - name: Submit results
+      if: always()
+      run: |
+        pip install testit-cli
+        export TMS_TOKEN=${{secrets.testit}}
+        testit results import --url https://team-pjrf.testit.software \ 
+          --project-id 0198bc65-9c62-791e-bd27-af1c9e2cfa0d \
+          --configuration-id 0198bc65-9c84-7d88-a61f-4d31413674b1 \
+          --testrun-name "SourceCraft test run" \
+          --results results/test-results.xml
