@@ -123,7 +123,7 @@ jobs:
         echo "config yc cli..."
         #"export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}" >> ~/.zshrc
         #export YC_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}
-        #export IAM_TOKEN=$YC_TOKEN
+        export YC_IAM_TOKEN=${{steps.IAMtoken.outputs.IAMTOKEN}}
         #yc config set token $IAM_TOKEN
         yc config set cloud-id b1g3o4minpkuh10pd2rj 
         yc config set folder-id b1gk7fa3kaal3f3et1n6
