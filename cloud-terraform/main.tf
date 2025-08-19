@@ -31,7 +31,7 @@ resource "yandex_serverless_container" "serverless_container" {
   memory             = 128
   service_account_id = var.sa_id
   image {
-    url = "cr.yandex/crprpai76362s82qgl49/bondarevsky:latest"
+    url = "cr.yandex/crprpai76362s82qgl49/bondarevsky@sha256:4a4bdebaee1b0a93ea3d6317fd67487660c0c45273dcc222dccf5380b16f1695"
   }
 }
 
