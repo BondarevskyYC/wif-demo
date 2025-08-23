@@ -85,11 +85,13 @@ jobs:
         terraform_version: 1.x.x # Specify your desired Terraform version
 
     
-    
-    - name: tf
+    # Необходимы все три согласно https://yandex.cloud/en/docs/tutorials/infrastructure-management/terraform-quickstart
+    # export YC_TOKEN=
+    # export YC_CLOUD_ID=
+    # export YC_FOLDER_ID=
+    - name: Test Terraform Deployment
       env:
         YC_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
-        IAM_TOKEN: ${{steps.IAMtoken.outputs.IAMTOKEN}}
         YC_CLOUD_ID: b1g3o4minpkuh10pd2rj
         YC_FOLDER_ID: b1gk7fa3kaal3f3et1n6
       run: |
