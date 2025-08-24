@@ -28,7 +28,7 @@ products = [
 
 @app.get("/")
 def read_root():
-    return {"Python Sample API powered by Evolution Container Apps"}
+    return {"Python Sample API powered by Serverless Contaienrs"}
 
 
 @app.get("/products")
