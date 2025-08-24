@@ -73,6 +73,7 @@ jobs:
         push: true
         tags: cr.yandex/crprpai76362s82qgl49/bondarevsky:latest
         file: ./restapi-python/Dockerfile
+        context: ./restapi-python
           
     - name: docker-login
       run: |
