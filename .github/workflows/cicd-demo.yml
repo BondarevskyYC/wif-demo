@@ -48,9 +48,7 @@ jobs:
     name: Deploy to Production to US1 Region
     needs: stage-deploy-job
     runs-on: ubuntu-latest
-    environment: 
-      name: Prod
-      url: 'https://teams.microsoft.com/l/app/468a6043-0d15-4c63-8d4f-44cc0e0f6473'
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@master
@@ -62,9 +60,7 @@ jobs:
     name: Deploy to Production to US2 Region
     needs: stage-deploy-job
     runs-on: ubuntu-latest
-    environment: 
-      name: Prod
-      url: 'https://teams.microsoft.com/l/app/468a6043-0d15-4c63-8d4f-44cc0e0f6473'
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@master
