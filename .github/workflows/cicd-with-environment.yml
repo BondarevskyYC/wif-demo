@@ -1,0 +1,89 @@
+
+name: CICD-with-Environment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-job:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x, 18.x]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: echo
+      run: |
+        echo 'echo from build-job'
+
+  qa-job:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build-job
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: echo
+      run: |
+        echo 'echo from qa-job'
+
+  stage-deploy-job:
+    name: Deploy to Staging
+    needs: qa-job
+    runs-on: ubuntu-latest
+    environment: 
+      name: Stage
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from stage-deploy-job'
+
+    
+  us1-region-prod-deploy-job:
+    name: Deploy to Prod CENTRAL-US1
+    needs: stage-deploy-job
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from us1-region-prod-deploy-job'
+
+  us2-region-prod-deploy-job:
+    name: Deploy to Prod WEST-US2
+    needs: stage-deploy-job
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from us2-region-prod-deploy-job'
+
+  europe-region-prod-deploy-job:
+    name: Deploy to Prod EUROPE
+    needs: stage-deploy-job
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency: production
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from europe-region-prod-deploy-job'
+
+
+    
