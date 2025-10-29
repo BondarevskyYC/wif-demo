@@ -52,7 +52,8 @@ jobs:
     name: Deploy to Prod CENTRAL-US1
     needs: stage-deploy-job
     runs-on: ubuntu-latest
-    
+    environment: production
+    concurrency: production
     steps:
     - name: Checkout code
       uses: actions/checkout@master
@@ -64,7 +65,8 @@ jobs:
     name: Deploy to Prod WEST-US2
     needs: stage-deploy-job
     runs-on: ubuntu-latest
-    
+    environment: production
+    concurrency: production
     steps:
     - name: Checkout code
       uses: actions/checkout@master
