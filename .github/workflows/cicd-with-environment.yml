@@ -40,6 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Stage
+      url: https://yandex.cloud
     steps:
     - name: Checkout code
       uses: actions/checkout@master
