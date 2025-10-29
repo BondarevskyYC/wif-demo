@@ -13,6 +13,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: echo
+      run: |
+        echo 'echo from build-job'
 
   qa-job:
     name: Test
@@ -23,6 +26,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
+    - name: echo
+      run: |
+        echo 'echo from qa-job'
 
   stage-deploy-job:
     name: Deploy to Staging
@@ -33,6 +39,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from stage-deploy-job'
 
     
   prod-deploy-job:
@@ -45,5 +54,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from prod-deploy-job'
 
     
