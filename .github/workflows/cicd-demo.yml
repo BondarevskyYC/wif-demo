@@ -45,7 +45,7 @@ jobs:
 
     
   us1-region-prod-deploy-job:
-    name: Deploy to Production to US1 Region
+    name: Deploy to Prod CENTRAL-US1
     needs: stage-deploy-job
     runs-on: ubuntu-latest
     
@@ -57,7 +57,7 @@ jobs:
         echo 'echo from us1-region-prod-deploy-job'
 
   us2-region-prod-deploy-job:
-    name: Deploy to Production to US2 Region
+    name: Deploy to Prod WEST-US2
     needs: stage-deploy-job
     runs-on: ubuntu-latest
     
@@ -67,6 +67,18 @@ jobs:
     - name: echo
       run: |
         echo 'echo from us2-region-prod-deploy-job'
+
+  europe-region-prod-deploy-job:
+    name: Deploy to Prod EUROPE
+    needs: stage-deploy-job
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: echo
+      run: |
+        echo 'echo from europe-region-prod-deploy-job'
 
 
     
