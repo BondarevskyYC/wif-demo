@@ -14,7 +14,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-  QA-job:
+  qa-job:
     name: Test
     runs-on: ubuntu-latest
     needs: build-job
@@ -24,23 +24,20 @@ jobs:
       with:
         fetch-depth: '0'
 
-
-  # Job: Continuous deployment job for LUIS
-  release-job:
-    name: Deploy Model to Staging Slot
-    needs: QA-job
+  stage-deploy-job:
+    name: Deploy to Staging
+    needs: qa-job
     runs-on: ubuntu-latest
     environment: 
       name: Stage
-      url: 'sideload app manifest'
     steps:
     - name: Checkout code
       uses: actions/checkout@master
 
     
-  prod:
-    name: Deploy Model to Production Slot
-    needs: release-job
+  prod-deploy-job:
+    name: Deploy to Production
+    needs: stage-deploy-job
     runs-on: ubuntu-latest
     environment: 
       name: Prod
