@@ -1,0 +1,52 @@
+
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-job:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+  QA-job:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build-job
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+
+
+  # Job: Continuous deployment job for LUIS
+  release-job:
+    name: Deploy Model to Staging Slot
+    needs: QA-job
+    runs-on: ubuntu-latest
+    environment: 
+      name: Stage
+      url: 'sideload app manifest'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+
+    
+  prod:
+    name: Deploy Model to Production Slot
+    needs: release-job
+    runs-on: ubuntu-latest
+    environment: 
+      name: Prod
+      url: 'https://teams.microsoft.com/l/app/468a6043-0d15-4c63-8d4f-44cc0e0f6473'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+
+    
