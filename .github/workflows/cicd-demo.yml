@@ -4,7 +4,7 @@ name: CICD
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build-job:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
         node-version: [16.x, 18.x, 20.x]
     steps:
     - name: Checkout
